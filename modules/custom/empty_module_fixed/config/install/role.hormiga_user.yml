@@ -1,0 +1,11 @@
+uuid: 12345678-1234-1234-1234-123456789abc
+langcode: en
+status: true
+dependencies: {  }
+name: hormiga_user
+label: 'Hormiga User'
+weight: 3
+is_admin: false
+permissions:
+  - 'access content'
+  - 'access hormiga site content'
