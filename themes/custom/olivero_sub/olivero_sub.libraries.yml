@@ -1,0 +1,14 @@
+global-styling:
+  version: 1.0
+  css:
+    theme:
+      css/style.css: {}
+login-page:
+  version: 1.0
+  css:
+    theme:
+      css/login-page.css: {}
+  js:
+    js/login-page.js: {}
+  dependencies:
+    - core/drupal

@@ -1,0 +1,7 @@
+todo_list_assets:
+  version: 1.0
+  css:
+    theme:
+      css/todo-list.css: {}
+  js:
+    js/todo-list.js: {}

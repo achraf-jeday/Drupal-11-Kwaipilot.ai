@@ -1,0 +1,25 @@
+name: Olivero Sub
+type: theme
+description: 'A subtheme of Olivero theme for custom styling'
+core_version_requirement: ^11
+base theme: olivero
+package: Custom
+libraries:
+  - olivero_sub/global-styling
+regions:
+  header: Header
+  primary_menu: 'Primary menu'
+  secondary_menu: 'Secondary menu'
+  page_top: 'Page top'
+  breadcrumb: Breadcrumb
+  highlighted: Highlighted
+  help: Help
+  content: Content
+  sidebar_first: 'First sidebar'
+  sidebar_second: 'Second sidebar'
+  footer_top: 'Footer top'
+  footer_bottom: 'Footer bottom'
+  page_bottom: 'Page bottom'
+  social: Social
+  content_above: 'Content above'
+  content_below: 'Content below'

@@ -1,0 +1,7 @@
+todo_list.page:
+  path: '/todo-list'
+  defaults:
+    _controller: '\Drupal\todo_list\Controller\TodoListController::content'
+    _title: 'Todo List'
+  requirements:
+    _permission: 'access content'

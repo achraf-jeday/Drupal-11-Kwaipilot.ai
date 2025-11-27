@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @file
+ * Hooks for empty_module_fixed module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_theme().
+ */
+function empty_module_fixed_theme() {
+  return [
+    'login_page_template' => [
+      'template' => 'login-page',
+      'variables' => [
+        'login_form' => NULL,
+      ],
+    ],
+  ];
+}
+
+/**
+ * Implements hook_theme_suggestions_alter().
+ */
+function empty_module_fixed_theme_suggestions_alter(array &$suggestions, array $variables, $hook) {
+  if ($hook === 'page') {
+    $route_name = \Drupal::routeMatch()->getRouteName();
+    if ($route_name === 'empty_module_fixed.page') {
+      $suggestions[] = 'page__login';
+    }
+  }
+}
+
+/**
+ * Implements hook_page_attachments_alter().
+ */
+function empty_module_fixed_page_attachments_alter(array &$attachments) {
+  // Add theme library for Facebook-style login page styling
+  $route_name = \Drupal::routeMatch()->getRouteName();
+  if ($route_name === 'empty_module_fixed.page') {
+    $attachments['#attached']['library'][] = 'olivero_sub/login-page';
+  }
+}

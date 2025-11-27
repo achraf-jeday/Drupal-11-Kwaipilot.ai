@@ -1,0 +1,198 @@
+/* Facebook-style login page styling */
+body.page--login {
+  background-color: #f0f2f5;
+  font-family: Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+
+/* Facebook blue header */
+#page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom, #f0f2f5, #e4e6e9);
+}
+
+/* Main content wrapper */
+#page {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Facebook-style left content (text and image) */
+body.page--login .content-area::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><rect width="300" height="200" fill="%23ffffff"/><circle cx="150" cy="100" r="40" fill="%231877f2" fill-opacity="0.1"/><rect x="50" y="60" width="200" height="80" rx="8" fill="%23ffffff" stroke="%231877f2" stroke-opacity="0.2" stroke-width="1"/></svg>');
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* Main login container */
+.empty-module-login-form {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
+  padding: 32px 40px;
+  width: 100%;
+  max-width: 400px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Facebook logo */
+.empty-module-login-form::before {
+  content: "facebook";
+  position: absolute;
+  top: -50px;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  font-size: 48px;
+  font-weight: bold;
+  color: #1877f2;
+  font-family: 'San Francisco', 'Segoe UI', 'Roboto', sans-serif;
+  letter-spacing: -1px;
+}
+
+/* Facebook-style form elements */
+.form-control {
+  background-color: #f5f6f7;
+  border: 1px solid #ccd0d5;
+  border-radius: 6px;
+  color: #1d2129;
+  font-size: 17px;
+  height: 40px;
+  padding: 0 8px 0 12px;
+  width: 100%;
+  margin-bottom: 16px;
+  font-family: Helvetica, Arial, sans-serif;
+}
+
+.form-control:focus {
+  background-color: #fff;
+  border-color: #1877f2;
+  box-shadow: 0 0 0 2px #e7f3ff;
+  outline: none;
+}
+
+/* Facebook blue login button */
+.btn-primary {
+  background: linear-gradient(to bottom, #1877f2, #166fe5);
+  border: none;
+  border-radius: 6px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: normal;
+  height: 40px;
+  margin-top: 6px;
+  width: 100%;
+  font-family: Helvetica, Arial, sans-serif;
+  font-weight: 600;
+  letter-spacing: normal;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(to bottom, #166ce4, #1467d2);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+/* Create new account button (white with blue text) */
+body.page--login .btn-secondary {
+  background: #ffffff;
+  border: 1px solid #1877f2;
+  border-radius: 6px;
+  color: #1877f2;
+  cursor: pointer;
+  font-size: 17px;
+  font-weight: normal;
+  padding: 12px 16px;
+  width: 100%;
+  margin-top: 12px;
+}
+
+body.page--login .btn-secondary:hover {
+  background: #f0f2f5;
+}
+
+/* Page title styling */
+body.page--login h1,
+body.page--login h2 {
+  color: #1c1e21;
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 28px;
+  font-weight: normal;
+  margin: 0 0 20px 0;
+  text-align: center;
+}
+
+/* Form title */
+body.page--login .form-title {
+  color: #1c1e21;
+  font-size: 32px;
+  font-weight: normal;
+  margin-bottom: 16px;
+  text-align: center;
+  line-height: 1.1;
+}
+
+/* Form description */
+body.page--login .form-description {
+  color: #606770;
+  font-size: 15px;
+  line-height: 1.33;
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+/* Footer links */
+body.page--login .login-footer {
+  color: #7f7f7f;
+  font-size: 12px;
+  margin-top: 28px;
+  text-align: center;
+}
+
+body.page--login .login-footer a {
+  color: #1877f2;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+body.page--login .login-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+  .empty-module-login-form {
+    padding: 24px;
+    margin: 16px;
+  }
+
+  .form-control {
+    font-size: 16px;
+    height: 36px;
+  }
+
+  .btn-primary {
+    font-size: 18px;
+    height: 36px;
+  }
+}

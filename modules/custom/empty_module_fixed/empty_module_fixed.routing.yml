@@ -1,0 +1,7 @@
+empty_module_fixed.page:
+  path: '/empty-page'
+  defaults:
+    _controller: '\Drupal\empty_module_fixed\Controller\EmptyPageController::content'
+    _title: 'Login'
+  requirements:
+    _permission: 'access content'

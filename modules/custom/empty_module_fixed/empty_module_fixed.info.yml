@@ -1,0 +1,5 @@
+name: Empty Module Fixed
+type: module
+description: 'An empty custom module'
+core_version_requirement: ^11
+package: Custom
