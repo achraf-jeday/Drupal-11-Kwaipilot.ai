@@ -1,0 +1,115 @@
+# Drupal .gitignore file for excluding contrib code and other files
+
+# Vendor directory (Composer dependencies)
+/vendor/
+!vendor/autoload.php
+
+# Drupal core (if using Composer-managed core)
+/core/
+
+# Contrib modules, themes, and libraries
+/modules/contrib/
+/themes/contrib/
+/libraries/
+
+# Drupal files directory (user uploads, etc.)
+/sites/*/files/
+/sites/*/private/
+sites/default/files/
+
+# Settings and configuration
+sites/default/settings.php
+sites/*/settings*.php
+
+# Temporary files
+tmp/
+temp/
+cache/
+
+# PHP and development tools
+.phpunit.result.cache
+.php_cs.cache
+.php-cs-fixer.cache
+/styleci.yml
+/.php_cs
+/.php_cs.dist
+/.php_cs.php
+
+# IDE and editor files
+.idea/
+*.swp
+*.swo
+*~
+.project
+.settings/
+.jsdtscope
+.launch
+.metadata/
+.ropeproject
+.springBeans
+.tern-project
+.vscode/
+.atom/
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Node.js and npm
+node_modules/
+npm-debug.log
+yarn-error.log
+yarn-debug.log
+
+# Composer cache
+composer.phar
+
+# Drush
+.drush-backups/
+
+# Drupal Console
+.drupal-console/
+
+# Behat
+/tests/behat/
+
+# Simpletest
+sites/*/files/simpletest/
+
+# Update backups
+backup-migrate/
+
+# Local settings (for multisite setups)
+/sites/*/settings/local.settings.php
+
+# Environment-specific files
+.env
+.env.local
+.env.production
+.env.staging
+
+# Logs
+*.log
+logs/
+
+# Backup files
+*.backup
+*.bak
+*.sql
+
+# Cache files
+cache/
+/cache/
+
+# Compiled assets (if using build tools)
+dist/
+build/
+
+# Web server files
+.htaccess
+web.config
