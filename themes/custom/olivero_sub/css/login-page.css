@@ -6,8 +6,9 @@ html, body {
   padding: 0;
 }
 
-body.page--login {
-  background-color: #f0f2f5;
+/* Target the actual body class from Results.html */
+body.path-empty-page {
+  background: linear-gradient(135deg, #f0f2f5 0%, #e4e6e9 100%) !important;
   font-family: Helvetica, Arial, sans-serif;
   margin: 0;
   padding: 0;
@@ -15,11 +16,20 @@ body.page--login {
   min-width: 100vw;
   height: 100%;
   width: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
-/* Facebook blue header */
-#page-wrapper {
+/* Ensure login page styling applies to the actual page structure */
+body.path-empty-page .dialog-off-canvas-main-canvas {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+/* Override Drupal's default page wrapper */
+body.path-empty-page #page-wrapper {
   min-height: 100vh;
   min-width: 100vw;
   height: 100vh;
@@ -28,42 +38,132 @@ body.page--login {
   align-items: center;
   justify-content: center;
   background: linear-gradient(to bottom, #f0f2f5, #e4e6e9);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: relative;
   z-index: 0;
 }
 
-/* Main content wrapper */
-#page {
-  width: 100%;
+/* Main content wrapper - updated for actual structure */
+body.path-empty-page #main-wrapper {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   min-height: 100vh;
-  min-width: 100vw;
-  padding: 20px;
-  position: relative;
-  z-index: 1;
-}
-
-/* Facebook-style left content (text and image) */
-body.page--login .content-area::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
+  padding: 40px 20px;
   width: 100%;
-  height: 100%;
-  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200"><rect width="300" height="200" fill="%23ffffff"/><circle cx="150" cy="100" r="40" fill="%231877f2" fill-opacity="0.1"/><rect x="50" y="60" width="200" height="80" rx="8" fill="%23ffffff" stroke="%231877f2" stroke-opacity="0.2" stroke-width="1"/></svg>');
-  opacity: 0.3;
-  pointer-events: none;
 }
 
-/* Main login container */
-.empty-module-login-form {
+body.path-empty-page .main-content__container {
+  max-width: 440px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+/* Target the actual messages structure from Results.html */
+body.path-empty-page .region--highlighted .messages-list {
+  width: 100%;
+  margin-bottom: 20px;
+  order: 1;
+}
+
+body.path-empty-page .region--highlighted .messages-list .messages {
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin: 0 0 20px 0;
+  font-size: 14px;
+  line-height: 1.36;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeInDown 0.4s ease-out;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Error messages - Facebook red */
+body.path-empty-page .region--highlighted .messages--error {
+  background: linear-gradient(135deg, #ff4e4e 0%, #ff3838 100%);
+  border: 1px solid #ff3838;
+  color: #ffffff;
+  position: relative;
+}
+
+body.path-empty-page .region--highlighted .messages--error:before {
+  content: '⚠';
+  display: inline-block;
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+/* Status messages - Facebook green */
+body.path-empty-page .region--highlighted .messages--status {
+  background: linear-gradient(135deg, #42b72a 0%, #36a420 100%);
+  border: 1px solid #36a420;
+  color: #ffffff;
+  position: relative;
+}
+
+body.path-empty-page .region--highlighted .messages--status:before {
+  content: '✓';
+  display: inline-block;
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+/* Info messages - Facebook blue */
+body.path-empty-page .region--highlighted .messages--info {
+  background: linear-gradient(135deg, #1877f2 0%, #166fe5 100%);
+  border: 1px solid #166fe5;
+  color: #ffffff;
+  position: relative;
+}
+
+body.path-empty-page .region--highlighted .messages--info:before {
+  content: 'ℹ';
+  display: inline-block;
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+/* Override Drupal's default message styling */
+body.path-empty-page .region--highlighted .messages__wrapper {
+  margin: 0;
+}
+
+body.path-empty-page .region--highlighted .messages__container {
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+body.path-empty-page .region--highlighted .messages__header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+}
+
+body.path-empty-page .region--highlighted .messages__icon {
+  display: none; /* Hide Drupal's default icon */
+}
+
+body.path-empty-page .region--highlighted .messages__content {
+  margin: 0;
+  padding: 0;
+}
+
+/* Facebook-style left content (text and image) - hide for now as it conflicts with actual structure */
+body.path-empty-page .content-area::before {
+  display: none;
+}
+
+/* Main login container - target actual form class from Results.html */
+body.path-empty-page .empty-module-login-form {
   background: white;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0 8px 16px rgba(0, 0, 0, 0.1);
@@ -72,10 +172,235 @@ body.page--login .content-area::before {
   max-width: 400px;
   position: relative;
   z-index: 1;
+  margin: 0 auto;
+}
+
+/* Form title and description */
+body.path-empty-page .form-title {
+  color: #1c1e21;
+  font-size: 32px;
+  font-weight: normal;
+  margin-bottom: 16px;
+  text-align: center;
+  line-height: 1.1;
+}
+
+body.path-empty-page .form-description {
+  color: #606770;
+  font-size: 15px;
+  line-height: 1.33;
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+/* Override Drupal's form field styling */
+body.path-empty-page .form-control {
+  background-color: #f5f6f7;
+  border: 1px solid #ccd0d5;
+  border-radius: 6px;
+  color: #1d2129;
+  font-size: 17px;
+  height: 40px;
+  padding: 0 8px 0 12px;
+  width: 100%;
+  margin-bottom: 16px;
+  font-family: Helvetica, Arial, sans-serif;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+body.path-empty-page .form-control:focus {
+  background-color: #fff;
+  border-color: #1877f2;
+  box-shadow: 0 0 0 2px #e7f3ff, 0 2px 8px rgba(0, 0, 0, 0.1);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+body.path-empty-page .form-control:hover {
+  border-color: #1877f2;
+  background-color: #ffffff;
+}
+
+/* Target Drupal's error styling */
+body.path-empty-page .form-element.error .form-control {
+  border-color: #ff3838 !important;
+  box-shadow: 0 0 0 2px rgba(255, 56, 56, 0.2) !important;
+  background-color: #fff5f5;
+}
+
+body.path-empty-page .form-element.error .form-control:focus {
+  border-color: #ff3838 !important;
+  box-shadow: 0 0 0 2px rgba(255, 56, 56, 0.2) !important;
+}
+
+/* Placeholder styling */
+body.path-empty-page .form-control::placeholder {
+  color: #606770;
+  opacity: 1;
+  font-weight: 400;
+}
+
+/* Messages container alignment - ensure messages are properly positioned above the login form */
+body.path-empty-page #main-wrapper {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+body.path-empty-page .main-content__container {
+  max-width: 440px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 2;
+}
+
+/* Ensure messages block is properly positioned */
+body.path-empty-page .main-content__container [class*="highlighted"] {
+  width: 100%;
+  margin-bottom: 20px;
+  order: 1;
+}
+
+/* Position the main content (login form) */
+body.path-empty-page .main-content__container main {
+  width: 100%;
+  order: 2;
+}
+
+/* Ensure login form is centered and properly sized */
+body.path-empty-page .empty-module-login-form {
+  margin: 0 auto;
+  max-width: 400px;
+  width: 100%;
+}
+
+/* Messages styling - ensure proper alignment with login box */
+body.path-empty-page .messages {
+  border-radius: 8px;
+  padding: 14px 16px;
+  margin: 0 0 20px 0;
+  font-size: 14px;
+  line-height: 1.36;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeInDown 0.4s ease-out;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Error messages - Facebook red */
+body.path-empty-page .messages--error {
+  background: linear-gradient(135deg, #ff4e4e 0%, #ff3838 100%);
+  border: 1px solid #ff3838;
+  color: #ffffff;
+  position: relative;
+}
+
+body.path-empty-page .messages--error:before {
+  content: '⚠';
+  display: inline-block;
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+/* Warning messages - Facebook orange */
+body.path-empty-page .messages--warning {
+  background: linear-gradient(135deg, #ffa500 0%, #ff8c00 100%);
+  border: 1px solid #ff8c00;
+  color: #ffffff;
+  position: relative;
+}
+
+body.path-empty-page .messages--warning:before {
+  content: '⚠';
+  display: inline-block;
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+/* Status messages - Facebook green */
+body.path-empty-page .messages--status {
+  background: linear-gradient(135deg, #42b72a 0%, #36a420 100%);
+  border: 1px solid #36a420;
+  color: #ffffff;
+  position: relative;
+}
+
+body.path-empty-page .messages--status:before {
+  content: '✓';
+  display: inline-block;
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+/* Info messages - Facebook blue */
+body.path-empty-page .messages--info {
+  background: linear-gradient(135deg, #1877f2 0%, #166fe5 100%);
+  border: 1px solid #166fe5;
+  color: #ffffff;
+  position: relative;
+}
+
+body.path-empty-page .messages--info:before {
+  content: 'ℹ';
+  display: inline-block;
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+/* Enhanced message list styling */
+body.path-empty-page .messages ul {
+  margin: 8px 0 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+body.path-empty-page .messages li {
+  margin: 4px 0 0 0;
+  padding: 0;
+  font-weight: 400;
+}
+
+body.path-empty-page .messages li:first-child {
+  margin-top: 0;
+}
+
+/* Add subtle animation for messages */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover effects for better interaction */
+body.path-empty-page .messages--error:hover {
+  background: linear-gradient(135deg, #ff3838 0%, #ff2b2b 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 56, 56, 0.3);
+}
+
+body.path-empty-page .messages--status:hover {
+  background: linear-gradient(135deg, #36a420 0%, #2f9417 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(54, 164, 32, 0.3);
 }
 
 /* Facebook logo */
-.empty-module-login-form::before {
+body.path-empty-page .empty-module-login-form::before {
   content: "facebook";
   position: absolute;
   top: -50px;
@@ -89,55 +414,42 @@ body.page--login .content-area::before {
   letter-spacing: -1px;
 }
 
-/* Facebook-style form elements */
-.form-control {
-  background-color: #f5f6f7;
-  border: 1px solid #ccd0d5;
-  border-radius: 6px;
-  color: #1d2129;
-  font-size: 17px;
-  height: 40px;
-  padding: 0 8px 0 12px;
-  width: 100%;
-  margin-bottom: 16px;
-  font-family: Helvetica, Arial, sans-serif;
-}
-
-.form-control:focus {
-  background-color: #fff;
-  border-color: #1877f2;
-  box-shadow: 0 0 0 2px #e7f3ff;
-  outline: none;
-}
-
-/* Facebook blue login button */
-.btn-primary {
+/* Facebook blue login button - target actual button class from Results.html */
+body.path-empty-page .btn-primary {
   background: linear-gradient(to bottom, #1877f2, #166fe5);
   border: none;
   border-radius: 6px;
   color: #ffffff;
   cursor: pointer;
-  font-size: 20px;
-  font-weight: normal;
+  font-size: 16px;
+  font-weight: bold;
   height: 40px;
-  margin-top: 6px;
+  padding: 0 16px;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 100%;
-  font-family: Helvetica, Arial, sans-serif;
-  font-weight: 600;
-  letter-spacing: normal;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 12px;
 }
 
-.btn-primary:hover {
-  background: linear-gradient(to bottom, #166ce4, #1467d2);
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+body.path-empty-page .btn-primary:hover {
+  background: linear-gradient(to bottom, #166fe5, #1456d4);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
-.btn-primary:active {
-  transform: translateY(1px);
+body.path-empty-page .btn-primary:active {
+  background: #1456d4;
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
 }
 
-/* Create new account button (white with blue text) */
-body.page--login .btn-secondary {
+/* Create new account button */
+body.path-empty-page .btn-secondary {
+  display: block;
   background: #ffffff;
   border: 1px solid #1877f2;
   border-radius: 6px;
@@ -148,15 +460,35 @@ body.page--login .btn-secondary {
   padding: 12px 16px;
   width: 100%;
   margin-top: 12px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-body.page--login .btn-secondary:hover {
+body.path-empty-page .btn-secondary:hover {
   background: #f0f2f5;
+  transform: translateY(-1px);
+}
+
+/* Footer links */
+body.path-empty-page .login-footer {
+  color: #7f7f7f;
+  font-size: 12px;
+  margin-top: 28px;
+  text-align: center;
+}
+
+body.path-empty-page .login-footer a {
+  color: #1877f2;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+body.path-empty-page .login-footer a:hover {
+  text-decoration: underline;
 }
 
 /* Page title styling */
-body.page--login h1,
-body.page--login h2 {
+body.path-empty-page h1,
+body.path-empty-page h2 {
   color: #1c1e21;
   font-family: Helvetica, Arial, sans-serif;
   font-size: 28px;
@@ -166,7 +498,7 @@ body.page--login h2 {
 }
 
 /* Form title */
-body.page--login .form-title {
+body.path-empty-page .form-title {
   color: #1c1e21;
   font-size: 32px;
   font-weight: normal;
@@ -176,7 +508,7 @@ body.page--login .form-title {
 }
 
 /* Form description */
-body.page--login .form-description {
+body.path-empty-page .form-description {
   color: #606770;
   font-size: 15px;
   line-height: 1.33;
@@ -185,37 +517,108 @@ body.page--login .form-description {
 }
 
 /* Footer links */
-body.page--login .login-footer {
+body.path-empty-page .login-footer {
   color: #7f7f7f;
   font-size: 12px;
   margin-top: 28px;
   text-align: center;
 }
 
-body.page--login .login-footer a {
+body.path-empty-page .login-footer a {
   color: #1877f2;
   text-decoration: none;
   font-size: 12px;
 }
 
-body.page--login .login-footer a:hover {
+body.path-empty-page .login-footer a:hover {
   text-decoration: underline;
 }
 
-/* Responsive design */
+/* Enhanced form validation states */
+body.path-empty-page .form-control.error {
+  border-color: #ff3838 !important;
+  background-color: #fff5f5 !important;
+  box-shadow: 0 0 0 2px rgba(255, 56, 56, 0.2) !important;
+}
+
+body.path-empty-page .has-validation-error .form-control {
+  animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  75% { transform: translateX(5px); }
+}
+
+/* Loading state for submit button */
+body.path-empty-page .btn-primary.loading {
+  position: relative;
+  color: transparent;
+}
+
+body.path-empty-page .btn-primary.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid #ffffff;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Ensure button hover states work with disabled state */
+body.path-empty-page .btn-primary:disabled:hover {
+  transform: none;
+  box-shadow: none;
+  background: linear-gradient(to bottom, #a0a0a0, #808080);
+  cursor: not-allowed;
+}
+
+/* Facebook logo styling */
+body.path-empty-page .facebook-logo {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 48px;
+  font-weight: bold;
+  color: #1877f2;
+  font-family: Arial, sans-serif;
+  letter-spacing: -1px;
+}
+
+/* Enhanced focus states for better accessibility */
+body.path-empty-page .form-control:focus-visible {
+  outline: 2px solid #1877f2;
+  outline-offset: 2px;
+}
+
+/* Ensure proper z-index for form elements */
+body.path-empty-page .empty-module-login-form {
+  position: relative;
+  z-index: 1;
+}
+
+/* Responsive improvements */
 @media (max-width: 480px) {
-  .empty-module-login-form {
-    padding: 24px;
-    margin: 16px;
+  body.path-empty-page .facebook-logo {
+    font-size: 36px;
+    margin-bottom: 16px;
   }
 
-  .form-control {
-    font-size: 16px;
-    height: 36px;
+  body.path-empty-page .form-title {
+    font-size: 24px;
   }
 
-  .btn-primary {
-    font-size: 18px;
-    height: 36px;
+  body.path-empty-page .form-description {
+    font-size: 14px;
   }
 }
