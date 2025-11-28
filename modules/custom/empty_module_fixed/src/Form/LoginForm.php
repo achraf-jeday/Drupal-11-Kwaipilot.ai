@@ -186,11 +186,22 @@ class LoginForm extends FormBase {
       $user = \Drupal\user\Entity\User::load($authenticated_user_id);
 
       if ($user) {
+        // Check if this is the user's first login
+        $is_first_login = empty($user->getLastLoginTime()) || $user->getLastLoginTime() == 0;
+
         // Use Drupal's user_login_finalize function to properly log in the user
         user_login_finalize($user);
 
-        // Add success message
-        $this->messenger->addStatus($this->t('Welcome back, @username!', ['@username' => $user->getDisplayName()]));
+        // Add appropriate success message based on login history
+        if ($is_first_login) {
+          $this->messenger->addStatus($this->t('Welcome to your account, @username! This is your first login.', ['@username' => $user->getDisplayName()]));
+        } else {
+          $this->messenger->addStatus($this->t('Welcome back, @username!', ['@username' => $user->getDisplayName()]));
+        }
+
+        // Update the user's last login time
+        $user->setLastLoginTime(\Drupal::time()->getRequestTime());
+        $user->save();
 
         // Redirect to admin content
         $form_state->setRedirect('system.admin_content');
