@@ -4,11 +4,40 @@ namespace Drupal\empty_module_fixed\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+use Drupal\Core\Messenger\MessengerInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Login form for the Facebook-style page.
  */
 class LoginForm extends FormBase {
+
+  /**
+   * The messenger service.
+   *
+   * @var \Drupal\Core\Messenger\MessengerInterface
+   */
+  protected $messenger;
+
+  /**
+   * Constructs a new LoginForm.
+   *
+   * @param \Drupal\Core\Messenger\MessengerInterface $messenger
+   *   The messenger service.
+   */
+  public function __construct(MessengerInterface $messenger) {
+    $this->messenger = $messenger;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('messenger')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -79,7 +108,7 @@ class LoginForm extends FormBase {
     $form['create_account'] = [
       '#type' => 'link',
       '#title' => $this->t('Create new account'),
-      '#url' => \Drupal\Core\Url::fromRoute('<none>'),
+      '#url' => Url::fromRoute('<none>'),
       '#attributes' => [
         'class' => ['btn', 'btn-secondary'],
       ],
@@ -137,12 +166,8 @@ class LoginForm extends FormBase {
         return;
       }
 
-      // TODO: Handle successful authentication
-      // - Set user session
-      // - Redirect to intended page or dashboard
-      // - Set remember me cookie if requested
-      // - Log authentication event
-      // - Update last login time
+      // Store user ID for successful authentication handling
+      $form_state->set('authenticated_user_id', $account);
 
     } catch (\Exception $e) {
       // Handle any authentication errors
@@ -154,17 +179,28 @@ class LoginForm extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $username = $form_state->getValue('username');
-    $password = $form_state->getValue('password');
+    $authenticated_user_id = $form_state->get('authenticated_user_id');
 
-    // Authentication validation is now handled in validateAuthentication()
-    // This method will only be called if validation passes
-    // TODO: Handle successful authentication
-    // - Set user session
-    // - Redirect user to intended page
-    // - Log successful login
-    // - Update user's last login time
-    $this->messenger()->addStatus($this->t('Authentication successful for: @username', ['@username' => $username]));
+    if ($authenticated_user_id) {
+      // Load the authenticated user
+      $user = \Drupal\user\Entity\User::load($authenticated_user_id);
+
+      if ($user) {
+        // Use Drupal's user_login_finalize function to properly log in the user
+        user_login_finalize($user);
+
+        // Add success message
+        $this->messenger->addStatus($this->t('Welcome back, @username!', ['@username' => $user->getDisplayName()]));
+
+        // Redirect to admin content
+        $form_state->setRedirect('system.admin_content');
+
+        return;
+      }
+    }
+
+    // Fallback redirect if something went wrong
+    $form_state->setRedirect('<front>');
   }
 
 }
