@@ -23,14 +23,17 @@
           <a href="#main-content" class="visually-hidden focusable">
             {{ 'Skip to main content'|t }}
           </a>
+          <div class="main-content__container container">
+            {{ page.highlighted }}
 
-          {# Main content #}
-          <main id="content" class="main-content" role="main">
-            <section class="content-area">
-              {{ page.content }}
-            </section>
-          </main>
+            {# Main content #}
+            <main id="content" class="main-content" role="main">
+              <section class="content-area">
+                {{ page.content }}
+              </section>
+            </main>
 
+          </div>
         </div>
       </div>
     </div>

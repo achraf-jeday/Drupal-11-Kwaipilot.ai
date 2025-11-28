@@ -43,11 +43,11 @@ class LoginForm extends FormBase {
       ],
     ];
 
-    $form['email'] = [
-      '#type' => 'email',
-      '#title' => $this->t('Email'),
+    $form['username'] = [
+      '#type' => 'textfield',
+      '#title' => $this->t('Username'),
       '#title_display' => 'hidden',
-      '#placeholder' => $this->t('Email address'),
+      '#placeholder' => $this->t('Username'),
       '#required' => TRUE,
       '#attributes' => [
         'class' => ['form-control'],
@@ -95,19 +95,76 @@ class LoginForm extends FormBase {
       ],
     ];
 
+    // Add custom validation
+    $form['#validate'][] = [$this, 'validateAuthentication'];
+
     return $form;
+  }
+
+  /**
+   * Custom validation handler for user authentication.
+   */
+  public function validateAuthentication(array &$form, FormStateInterface $form_state) {
+    $username = $form_state->getValue('username');
+    $password = $form_state->getValue('password');
+
+    // Basic validation - check if fields are not empty
+    if (empty($username)) {
+      $form_state->setErrorByName('username', $this->t('Please enter your username.'));
+      return;
+    }
+
+    if (empty($password)) {
+      $form_state->setErrorByName('password', $this->t('Please enter your password.'));
+      return;
+    }
+
+    // Drupal 11 user authentication validation
+    try {
+      // Load user by username
+      $account = \Drupal::service('user.auth')->authenticate($username, $password);
+
+      if (!$account) {
+        // Invalid username/password combination
+        $form_state->setErrorByName('password', $this->t('The username or password you entered is incorrect. Please try again.'));
+        return;
+      }
+
+      // Check if user account is active
+      $user = \Drupal\user\Entity\User::load($account);
+      if (!$user || !$user->isActive()) {
+        $form_state->setErrorByName('username', $this->t('This account has been disabled.'));
+        return;
+      }
+
+      // TODO: Handle successful authentication
+      // - Set user session
+      // - Redirect to intended page or dashboard
+      // - Set remember me cookie if requested
+      // - Log authentication event
+      // - Update last login time
+
+    } catch (\Exception $e) {
+      // Handle any authentication errors
+      $form_state->setErrorByName('password', $this->t('An error occurred during authentication. Please try again later.'));
+    }
   }
 
   /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    $email = $form_state->getValue('email');
+    $username = $form_state->getValue('username');
     $password = $form_state->getValue('password');
 
-    // For demonstration purposes - in a real application you would
-    // implement proper authentication logic here
-    $this->messenger()->addStatus($this->t('Login attempt with email: @email', ['@email' => $email]));
+    // Authentication validation is now handled in validateAuthentication()
+    // This method will only be called if validation passes
+    // TODO: Handle successful authentication
+    // - Set user session
+    // - Redirect user to intended page
+    // - Log successful login
+    // - Update user's last login time
+    $this->messenger()->addStatus($this->t('Authentication successful for: @username', ['@username' => $username]));
   }
 
 }
